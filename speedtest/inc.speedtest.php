@@ -14,17 +14,18 @@
 *	1 KB/s = 8.192 kbps
 *	1 kbps = .1221 KB/s
 */
+/*Variables de entorno*/
+date_default_timezone_set("America/Mexico_City");
+header('Content-Type: text/html; charset=utf-8');
+require_once('common\functions.php');
+load_vars('common\system.cfg');
 
 /*Main*/
 $test = speedtest();
 print_r($test);
 
 /*Functions*/
-date_default_timezone_set("America/Mexico_City");
-header('Content-Type: text/html; charset=utf-8');
 function speedtest($urlTest=0){
-	// date_default_timezone_set("America/Mexico_City");
-	// header('Content-Type: text/html; charset=utf-8');
 	$data = array();
 	#Tiempo de inicio
 	set_time_limit(0);
@@ -68,9 +69,10 @@ function speedtest($urlTest=0){
 }
 
 function savedata($data=array(),$string=''){
+	global $cfg;
 	require_once('common/inc.mysqli.php');
-	$puntoventa = "prueba_".rand(1,999);
-	$pais = "México";
+	$puntoventa = $cfg['punto_venta'];
+	$pais = $cfg['pais'];
 	$ip = getIp();
 	$browser = json_encode(getBrowser());
 	$sql = "INSERT INTO speedtest SET 
@@ -124,5 +126,6 @@ function getBrowser(){
 	$info['agent'] = $_SERVER['HTTP_USER_AGENT'];
 	return $info;
 }
+
 /*O3M*/
 ?>

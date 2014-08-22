@@ -4,8 +4,16 @@
 *   @author Oscar Maldonado
 *   O3M
 */
+require_once('functions.php');
+load_vars('system.cfg');
+
 function SQLConn() {	
-	require_once("conexion.php");
+	#require_once("conexion.php");
+	global $cfg;
+	$host = $cfg[];
+	$user = $cfg[];
+	$pass = $cfg[];
+	$database = $cfg[];
 	$link = new mysqli($host,$user,$pass,$database);
 	if ($link->connect_error) {
 		echo "Error de Connexion ($link->connect_errno) $link->connect_error\n";
