@@ -5,14 +5,15 @@
 	</head>
 	<body>
 		<div id="tblLogin" style="text-align:center;">
-			<div id="msj">{MSJ}</div>
+			
 			<table align="center">
 				<form id="frmLogin" method="post" action="">
 				<thead><th colspan="2">{login}</th></thead>
 				<tbody>
+					<tr><td colspan="2"><div id="msj">{MSJ}</div></td></tr>
 					<tr>
 						<td>{usuario}:</td>
-						<td><input type="text" id="txtUsuario" name="txtUsuario" size="20" maxlength="20"/></td>
+						<td><input type="text" id="txtUsuario" name="txtUsuario" size="20" maxlength="20" class="input"  /></td>
 					</tr>
 					<tr>
 						<td>{clave}:</td>
@@ -20,30 +21,16 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><input type="button" id="btnEntrar" name="btnEntrar" value=":: {entrar} ::" onclick="autentificar()" /></td>
+						<td>
+						<span class="btn" id="btnEntrar" onclick="btnSubmit()">{entrar}</span>
+						</td>
 					</tr>
 				</tbody>				
 				</form>
 			</table>
 			<a href="index2.php">Entra</a>
 		</div>		
-		{FOOTER}		
-
-		<div class="contenido">
-			<div id="ventana1" class="modal" title="Dialogo Modal">     
-		    	<p>Esto es un dialogo modal, por lo que la web queda bloqueada mientras esta abierta</p>	 
-			</div>
-			<div id="ventana2" class="modal"  title="Dialogo no modal">		     
-			    <p>Esto es un dialogo no modal, por lo que la web no queda bloqueada al abrir la ventana. También se pueden introducir fotos, videos o cualquer cosa en las ventanas. </p>
-			    <img src="" alt="jquery" />		 
-			</div>
-			<div id="ventana3" class="modal"  title="Otra animación">		     
-			    <p>Incluye múltiples animaciones y opciones. Para cambiar la apariencia basta con modificar el css. Mas información en <a href="http://api.jqueryui.com/dialog/">http://api.jqueryui.com/dialog/</a></p>		 
-			</div>
-		</div>
-		<div id="b1" class="boton">Dialogo modal</div>
-		<div id="b2" class="boton">Dialogo no modal</div>
-		<div id="b3" class="boton">Otra animación</div>
-
+		{FOOTER}
+		{POPUPS}		
 	</body>
 </html>

@@ -55,6 +55,22 @@ function footerHtml($template='footer.html', $params=array()){
 	$footer=$footer->output();
 	return $footer;
 }
-
+function popupsHtml($params=array()){
+	global $Path;
+	#POPUPS
+	$template='popups.html';
+	$htmlTpl = $Path['html'].$template;
+	$popups = new Template($htmlTpl);
+	// Busca variables adicionales dentro array $params
+	if($tvars = count($params)){		
+		$vnames = array_keys($params);
+		$vvalues = array_values($params);
+		foreach($params as $vname => $vvalue){
+			$popups->set($vname, $vvalue);
+		}
+	}
+	$popups=$popups->output();
+	return $popups;
+}
 /*O3M*/
 ?>

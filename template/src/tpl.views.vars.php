@@ -41,8 +41,13 @@ function tpl_vars($cmd){
 
 function vars_login(){
 	global $Path, $dic; 
+	$popup1 = array(
+				 TITULO		=> 'Dialogo Modal'
+				,CONTENIDO 	=> '<p>Esto es un dialogo modal, por lo que la web queda bloqueada mientras esta abierta</p>'
+			);
 	$negocio = array(
 				 MORE 		=> incJs($Path[srcjs].'login.js')
+				,POPUPS		=> popupsHtml($popup1)
 			);
 	$texto = array(
 				 login 		=> $dic[general][login]
