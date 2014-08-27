@@ -1,0 +1,30 @@
+body{}
+
+.contenido {
+	width:460px;
+	margin:0 auto;
+}
+
+.modal{ 
+    display:none;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#808080;
+    line-height:28px;
+    font-size:15px;
+    text-align:justify; 
+}
+
+/*.boton {
+    float:left;
+    margin-right:10px;
+    margin-top:200px;
+    width:130px;
+    height:40px;
+    background:#222;
+    color:#fff;
+    padding:16px 6px 0 6px;
+    cursor:pointer;
+    text-align:center;
+}
+ 
+.boton:hover{color:#01DF01}*/
