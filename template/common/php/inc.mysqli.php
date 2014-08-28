@@ -7,7 +7,7 @@
 
 function SQLConn() {
 	global $db;
-	$link = new mysqli($db[host],$db[user],$db[pass],$db[db]);
+	$link = new mysqli($db[host],$db[user],$db[pass],$db[db2]);
 	if ($link->connect_error) {
 		echo "Error de Connexion ($link->connect_errno) $link->connect_error\n".$db[conn_dbi];
 		exit;
@@ -26,12 +26,12 @@ function SQLQuery($SQL){
 		$vSql=explode(' ',$SQL);
 		if(in_array(strtoupper($vSql[0]),$Cmd)){
 		    try{
-		    	$db = SQLConn(); //Llama conexión
-		    	$con = $db->query($SQL)or die(mysqli_connect_errno($db).' -> '.mysqli_connect_error()); //Ejecuta query	    	 	
-		    	if(mysqli_num_rows($con)){
-		    		$Result=mysqli_fetch_array($con);
+		    	$conn = SQLConn(); //Llama conexión
+		    	$qry = $conn->query($SQL)or die(mysqli_connect_errno($conn).' -> '.mysqli_connect_error()); //Ejecuta query	    	 	
+		    	if(mysqli_num_rows($qry)){
+		    		$Result=mysqli_fetch_array($qry);
 		    	}else{$Result=null;}
-		    	mysqli_close($db); //Cierra conexión
+		    	mysqli_close($conn); //Cierra conexión
 		    	return $Result;
 		    }catch(PDOException $e){
 		    	echo "ERROR: La consulta SQL esta vacía o tiene errores: ".$SQL;
@@ -53,9 +53,9 @@ function SQLDo($SQL){
 		$vSql=explode(' ',$SQL);
 		if(in_array(strtoupper($vSql[0]),$Cmd)){
 		    try{
-		    	$db = SQLConn(); //Llama conexión
-		    	$con = $db->query($SQL)or die(mysqli_connect_errno($db).' -> '.mysqli_connect_error()); //Ejecuta query	    	 			    	
-		    	mysqli_close($db); //Cierra conexión
+		    	$conn = SQLConn(); //Llama conexión
+		    	$qry = $conn->query($SQL)or die(mysqli_connect_errno($conn).' -> '.mysqli_connect_error()); //Ejecuta query	    	 			    	
+		    	mysqli_close($conn); //Cierra conexión
 		    	return true;
 		    }catch(PDOException $e){
 		    	echo "ERROR: La consulta SQL esta vacía o tiene errores: ".$SQL;
