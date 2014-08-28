@@ -9,12 +9,12 @@
 if(!$in[m]){header('location: '.$Raiz[url]);}
 // Modulos
 $modulo = array(
-			 GENERAL 	=> 'tpl.views.vars.php'
-			,CAPTURA 	=> 'tpl.views.vars.captura.php'
-			,CONSULTAS 	=> 'tpl.views.vars.consultas.php'
-			,REPORTES 	=> 'tpl.views.vars.reportes.php'
-			,ADMIN 		=> 'tpl.views.vars.admin.php'
-			);
+			 GENERAL 	=> 'views.vars.general.php'
+			,CAPTURA 	=> 'views.vars.captura.php'
+			,CONSULTAS 	=> 'views.vars.consultas.php'
+			,REPORTES 	=> 'views.vars.reportes.php'
+			,ADMIN 		=> 'views.vars.admin.php'
+		);
 $mod = enArray($in[m],$modulo);
 require_once($Path[src].$modulo[$mod]);
 $seccion = $in[s];
