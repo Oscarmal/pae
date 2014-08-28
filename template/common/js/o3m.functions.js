@@ -28,6 +28,7 @@ function modal(idObjeto,w,h,tipo){
         var Hide        = "scale";
         var Resizable   = "false"; 
         var Position    = "center";
+        var Modal       = "true";
         var Close       = 1;
         break;
     default:

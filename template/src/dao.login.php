@@ -6,7 +6,7 @@
 * @author 		Oscar Maldonado
 */
 function login($usuario, $clave){
-	$sql = "SELECT id_usuario, grupo, activo FROM $db1.he_usuarios WHERE usuario='$usuario' and clave='$clave' and activo=1 LIMIT 1;";
+	$sql = "SELECT id_usuario, grupo, activo FROM he_usuarios WHERE usuario='$usuario' and clave='$clave' and activo=1 LIMIT 1;";
 	$resultado = SQLQuery($sql);
 	if($resultado[0]){	
 		return $resultado;

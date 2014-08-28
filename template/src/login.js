@@ -25,7 +25,7 @@ function btnSubmit(){
 
 function login(usuario, clave){	
 	var raiz = raizPath();
-	var ajax_url = "login.php";
+	var ajax_url = raiz+"src/login.php";
 	$.ajax({
 		type: 'POST',
 		url: ajax_url,
@@ -44,7 +44,7 @@ function login(usuario, clave){
 			alert(respuesta);
 			if(respuesta){
 				// location.href = respuesta;
-				
+				alert(respuesta);
 			}
 		},
 		complete: function(){    

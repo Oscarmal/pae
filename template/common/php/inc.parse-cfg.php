@@ -42,10 +42,12 @@ function load_vars($filename='') {
 							$db[host] = $db[db_local_host];
 							$db[user] = $db[db_local_user];
 							$db[pass] = $db[db_local_pass];
-							$db[db] = $db[db_local_db];
+							$db[db1] = $db[db_local_db1];
+							$db[db2] = $db[db_local_db2];
+							$db[db3] = $db[db_local_db3];
 							$db[conn_std] = $db[db_local_host].','.$db[db_local_user].','.$db[db_local_pass];
-							$db[conn_dbi] = $db[db_local_host].','.$db[db_local_user].','.$db[db_local_pass].','.$db[db_local_db];
-							$db[conn_pdo] = 'mysql:host='.$db[db_local_host].';dbname='.$db[db_local_db].', '.$db[db_local_user].', '.$db[db_local_pass];
+							$db[conn_dbi] = $db[db_local_host].','.$db[db_local_user].','.$db[db_local_pass].','.$db[db_local_db1];
+							$db[conn_pdo] = 'mysql:host='.$db[db_local_host].';dbname='.$db[db_local_db1].', '.$db[db_local_user].', '.$db[db_local_pass];
 							break;	
 						case 'postgres':
 							break;
