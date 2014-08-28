@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="refresh" content="0; url=site/index.php?m=myyU4SpxAU7VN9TJKazRLGB/te2RvlZhPHAwosGk7IM=&s=CMICUuDpiFhismNmLVPYkYN14aqpEu6FzIUix1PuF4o=" />
+		<meta http-equiv="refresh" content="0; url=site/?
+		m=8fe58c2c3a3d77cdca6c21bdcbbb2f68
+		&s=79c050078b734876858e9535abb453e1" />
 	</head>
 <html>

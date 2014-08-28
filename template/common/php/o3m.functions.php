@@ -159,15 +159,38 @@ function plantillaRtf($Plantilla,$Ruta,$NuevoDoc,$Variables,$CharAbre,$CharCierr
 	return $NuevoDoc;
 }
 
-function encrypt($input,$encrypt=false){
+function encrypt($input,$opt=false){
 	global $cfg;
 	$Key = $cfg[encrypt_key]; 
-	if($encrypt){
+	if($opt){
 		$output = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($Key), $input, MCRYPT_MODE_CBC, md5(md5($Key))));
+    	// $output = urlencode($output);
+    	$output = md5($output);
 	}else{
+		// $input = urldecode($input);
 		$output = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($Key), base64_decode($input), MCRYPT_MODE_CBC, md5(md5($Key))), "\0");
+    }
+	return ($output);	
+}
+
+function siExiste($texto, $txtmd5){
+// Compara una cadena sin codificar contra una en MD5
+	// $encrypt = md5(encrypt($texto,1));
+	$encrypt = encrypt($texto,1);
+	$resultado = ($encrypt == $txtmd5)?true:false;
+	return $resultado;
+}
+
+function enArray($valor,$array){
+// Busca que exista el indice de un array y devuelve en nombre del indice
+	foreach(array_keys($array) as $n){
+		if(siExiste($n,$valor) && !$ok){
+			$ok = true;
+			$find = $n;
+			break;
+		}else{$find = false;}	
 	}
-	return $output;	
+	return $find;
 }
 
 function diccionario($filename='es.dic') {

@@ -19,19 +19,20 @@ function btnSubmit(){
 		$("#txtClave").focus();
 		return false;
 	}
-	// $("#tblLogin").submit();
 	login(usuario, clave);
 }
 
 function login(usuario, clave){	
+	var modulo = $("#mod").val().toLowerCase(); // <-- Modulo actual del sistema
 	var raiz = raizPath();
-	var ajax_url = raiz+"src/login.php";
+	var ajax_url = raiz+"src/"+modulo+"/login.php";
 	$.ajax({
 		type: 'POST',
 		url: ajax_url,
 		dataType: "json",
 		data: {      
 			auth : 1,
+			modulo : modulo,
 			usuario : usuario,
 			clave : clave
 		},
@@ -41,11 +42,7 @@ function login(usuario, clave){
 		    popup('Autentificando',msj,0,0,3);  
 		},
 		success: function(respuesta){ 
-			alert(respuesta);
-			if(respuesta){
-				// location.href = respuesta;
-				alert(respuesta);
-			}
+			setTimeout(function(){	$(location).attr('href', respuesta.url)	}, 2000);
 		},
 		complete: function(){    
 		    $("#popups-alerts").empty();

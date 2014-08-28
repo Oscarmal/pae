@@ -18,6 +18,7 @@ function contenidoHtml($template='error.html', $params=array()){
 	$more = ($params[MORE])?$params[MORE]:'';
 	$html->set('INCLUDES', includesHtml($more));
 	$html->set('FOOTER', footerHtml());
+	$html->set('POPUPS', popupsHtml());	
 	// Busca variables adicionales dentro array $params
 	if($tvars = count($params)){		
 		$vnames = array_keys($params);
