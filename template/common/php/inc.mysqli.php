@@ -55,21 +55,17 @@ function SQLDo($SQL){
 		    try{
 		    	$conn = SQLConn(); //Llama conexión
 		    	$qry = $conn->query($SQL)or die(mysqli_connect_errno($conn).' -> '.mysqli_connect_error()); //Ejecuta query	    	 			    	
-		    	
 		    	// Guardar LOGS
 		    	if($cfg[querylog_onoff]){
 			    	$Id = $conn->insert_id;
 					$TotRows = $conn->affected_rows;
-					if($TotRows){
-						$Result = $TotRows;					
-						#Identify table in query
+					if($TotRows){	
 						$idtable=$Id;
 						$action=strtoupper($vSql[0]);
 						if($action=='INSERT'){
 							$t=explode('INTO ',strtoupper($SQL));
 							$t2=explode(' ',$t[1]);
 							$table=strtolower($t2[0]);
-							$Result=$Id;
 						}				
 						if($action=='UPDATE'){
 							$t=explode(' ',strtoupper($SQL));
@@ -86,7 +82,6 @@ function SQLDo($SQL){
 					}
 				}
 		    	// --
-
 		    	mysqli_close($conn); //Cierra conexión
 		    	return true;
 		    }catch(PDOException $e){
