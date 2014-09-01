@@ -2,7 +2,7 @@
 /**
 * Descripcion:	Establece ambiente de trabajo para cada página
 * Creación:		2014-06-11
-* Modificación:	2014-08-25
+* Modificación:	2014-09-01
 * @author 		Oscar Maldonado - O3M
 *
 */
