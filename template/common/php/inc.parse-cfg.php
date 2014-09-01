@@ -10,7 +10,7 @@
 function load_vars($filename='') {
 #Load config information from config.ini file.		
 	try {
-		global $cfg, $db;
+		global $cfg, $db, $var;
 		if (file_exists($filename)) {
 	        if ($handle = fopen($filename, 'r')) {
 	        	$varsList = array('cfg','var','db');
