@@ -6,7 +6,33 @@
 * @author 		Oscar Maldonado
 */
 function login($usuario, $clave){
-	$sql = "SELECT id_usuario, grupo, activo FROM he_usuarios WHERE usuario='$usuario' and clave='$clave' and activo=1 LIMIT 1;";
+	$sql = "SELECT 
+				 a.id_usuario
+				,a.usuario
+				,a.grupo
+				,a.activo
+				,b.id_personal
+				,CONCAT(b.nombre,' ',b.paterno,' ',b.materno) as nombreCompleto
+				,b.empleado_num
+				,b.email
+				,c.nombre as empresa
+				,c.pais
+				,d.mod1
+				,d.mod2
+				,d.mod3
+				,d.mod4
+				,d.mod5
+				,d.mod6
+				,d.mod7
+				,d.mod8
+				,d.mod9
+				,d.mod10
+				FROM sis_usuarios a
+				LEFT JOIN he_personal b USING(id_personal)
+				LEFT JOIN he_empresas c USING(id_empresa)
+				LEFT JOIN sis_accesos d ON a.id_usuario=d.id_usuario
+				WHERE a.usuario='$usuario' and a.clave='$clave' and a.activo=1
+				LIMIT 1;";
 	$resultado = SQLQuery($sql);
 	if($resultado[0]){	
 		return $resultado;

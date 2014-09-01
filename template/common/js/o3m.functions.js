@@ -6,6 +6,12 @@ $(document).ready(function(){
     });
 });
 
+function changeCss(archivo) {
+    var raiz = raizPath();
+    var archivo = raiz + 'common/css/' + archivo;
+    $('#archivoCss').attr('href', archivo);
+}
+
 function modal(idObjeto,w,h,tipo){
 // Contruye Popup con diferentes efectos (jQueryUI)
     switch(tipo) {

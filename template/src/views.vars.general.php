@@ -1,4 +1,4 @@
-<?php
+<?php session_name('o3m'); session_start(); include_once($_SESSION['header_path']);
 /* O3M
 * Manejador de Vistas y asignación de variables
 * 
@@ -46,9 +46,10 @@ function tpl_vars($cmd, $urlParams=array()){
 function vars_login($urlParams){
 	global $Path, $dic;
 	$modulo = strtolower(MODULO).'/';
+	$seccion = encrypt('LOGIN',1);
 	## Logica de negocio ##
 	// Mensajes via URL	
-	switch ($urlParams[er]) {
+	switch ($urlParams[e]) {
 		case 1: $msj = $dic[login][msj_noauth];
 				break;
 		case 2: $msj = $dic[login][msj_salir];
@@ -61,6 +62,7 @@ function vars_login($urlParams){
 	$negocio = array(
 				 MORE 		=> incJs($Path[srcjs].$modulo.'login.js')
 				,MODULE 	=> strtolower(MODULO)
+				,SECTION 	=> ($seccion)
 			);
 	$texto = array(
 				 login 		=> $dic[general][login]
@@ -73,11 +75,13 @@ function vars_login($urlParams){
 	return $data;
 }
 function vars_inicio($urlParams){
-	global $Path, $dic;
+	global $var, $Path, $dic, $usuario;
 	## Logica de negocio ##
 	## Envio de valores ##
 	$negocio = array(
 				 MORE 		=> ''
+				,CONTENIDO	=> $usuario[nombre]
+				,LINK_SALIR	=> '../site/?m='.$var[GENERAL].'&s='.$var[LOGIN].'&e=2'
 			);
 	$texto = array();
 	$data = array_merge($negocio, $texto);

@@ -24,6 +24,7 @@ function btnSubmit(){
 
 function login(usuario, clave){	
 	var modulo = $("#mod").val().toLowerCase(); // <-- Modulo actual del sistema
+	var seccion = $("#sec").val();
 	var raiz = raizPath();
 	var ajax_url = raiz+"src/"+modulo+"/login.php";
 	$.ajax({
@@ -33,6 +34,7 @@ function login(usuario, clave){
 		data: {      
 			auth : 1,
 			modulo : modulo,
+			s : seccion,
 			usuario : usuario,
 			clave : clave
 		},
