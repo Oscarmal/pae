@@ -35,11 +35,8 @@ function login($usuario, $clave){
 				WHERE a.usuario='$usuario' and a.clave='$clave' and a.activo=1
 				LIMIT 1;";
 	$resultado = SQLQuery($sql);
-	if($resultado[0]){	
-		return $resultado;
-	}else{
-		return false;
-	}
+	$resultado = ($resultado[0]) ? $resultado : false ;
+	return $resultado;
 }
 /*O3M*/
 ?>
