@@ -68,10 +68,11 @@ function limpiarTmp($dir, $extension, $segundos){
     closedir($h);
 }
 
-function LogTxt($nom, $u, $n, $g, $ub, $r){
+function LogTxt($nom, $u, $n, $g, $ub, $r, $params){
 # Función para crear archivo log .txt con movimientos dentro del sistema
 # acceso(nombre_archivo, usuario ID, usuario_nombre, usuario, nivel, ruta)
-$fec = date("Y_m_d");
+global $cfg;
+$fec = date("Y-m-d");
 if($_SERVER["HTTP_X_FORWARDED_FOR"])
 {
 	if($pos=strpos($_SERVER["HTTP_X_FORWARDED_FOR"]," "))
@@ -91,11 +92,11 @@ $page = $_SERVER['PHP_SELF'];
 if($ip_pub!=$hostname){	$host = $hostname; }
 $f = date("d-m-Y H:i:s");
 $nav = $_SERVER['HTTP_USER_AGENT'];
-$archivo = $r."log/".$nom."_".$fec.".txt";
+$archivo = $r.$cfg[path_log].strtolower($nom)."_".$fec.".txt";
 $fp = fopen($archivo, "a+");
 # FECHA | USUARIO | NOMBRE | GRUPO | UBICACION | IP PUBLICA | IP LOCAL | NOMBRE DE PC | NAVEGADOR | URL ANTERIOR | URL ACTUAL
 #$texto = $f."$s".$u."$s".$n."$s".$e."$s".$ub."$s".$ip_pub."$s".$ip_loc."$s".$host."$s".$nav."$s".$page_ant."$s".$page."\r\n";
-$texto = $f."$s".$u."$s".$n."$s".$g."$s".$ub."$s".$ip_pub."$s".$ip_loc."$s".$host."$s".$nav."$s".$page_ant."$s".$page."\r\n";
+$texto = $f."$s".$u."$s".$n."$s".$g."$s".$ub."$s".$ip_pub."$s".$ip_loc."$s".$host."$s".$nav."$s".$page_ant."$s".$page."$s".$params."\r\n";
 $write = fputs($fp, $texto);
 fclose($fp);
 return ;

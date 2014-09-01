@@ -35,6 +35,7 @@ require_once($Raiz[local].$cfg[php_functions]);
 require_once($Raiz[local].$cfg[php_mysql]);
 require_once($Raiz[local].$cfg[php_tpl]);
 require_once($Raiz[local].$cfg[path_php].'inc.constructHtml.php');
+require_once($Path[src].'dao.online.php');;
 // Parsea parámetros obtenidos por URL y los pone en arrays: $in[] y $ins[]
 parseFormSanitizer($_GET, $_POST); # $ins[]
 parseForm($_GET, $_POST); # $in[]
@@ -71,5 +72,17 @@ $usuario[mod3]				= $_SESSION['mod3'];
 $usuario[mod4]				= $_SESSION['mod4'];
 $usuario[mod5]				= $_SESSION['mod5'];
 $usuario[mod6]				= $_SESSION['mod6'];
+
+#Log Txt | (nombre_archivo, usuario ID, usuario_nombre, usuario, nivel, ruta, URLparams)
+$params = ($in) ? implode('&', array_map(function ($v, $k) { return sprintf("%s='%s'", $k, $v); }, $in, array_keys($in))) : '';
+LogTxt('he_'.$usuario[empresa],$usuario[id_usuario],$usuario[nombre],$usuario[usuario],$usuario[grupo],$Raiz[local],$params);
+#Online
+$ultimo_clic=time();
+// echo online_select($usuario[id_usuario]);
+// if($qry=online_select($usuario[id_usuario])){
+// 	online_update($usuario[id_usuario], $ultimo_clic);
+// }else{
+// 	online_insert($usuario[id_usuario], $ultimo_clic);
+// }
 /*O3M*/
 ?>
