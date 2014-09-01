@@ -6,7 +6,8 @@
 * @author 		Oscar Maldonado
 */
 function online_select($id_usuario){
-	$sql = "SELECT id_online FROM sis_online WHERE id_usuario='$id_usuario' LIMIT 1;";
+	global $db;
+	$sql = "SELECT id_online FROM $db[tbl_online] WHERE id_usuario='$id_usuario' LIMIT 1;";
 	$resultado = SQLQuery($sql);
 	if($resultado[0]){	
 		return $resultado;
@@ -16,7 +17,8 @@ function online_select($id_usuario){
 }
 
 function online_insert($id_usuario, $ultimo_clic){
-	$sql = "INSERT INTO sis_online SET 
+	global $db;
+	$sql = "INSERT INTO $db[tbl_online] SET 
 				online = '$ultimo_clic',
 				id_usuario = '$id_usuario';";
 	$resultado = (SQLDo($sql))?true:false;
@@ -24,7 +26,8 @@ function online_insert($id_usuario, $ultimo_clic){
 }
 
 function online_update($id_usuario, $ultimo_clic){
-	$sql = "UPDATE sis_online SET 
+	global $db;
+	$sql = "UPDATE $db[tbl_online] SET 
 				online='$ultimo_clic' 
 				WHERE id_usuario='$id_usuario'
 				LIMIT 1;";
