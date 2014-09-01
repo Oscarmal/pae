@@ -46,7 +46,7 @@ function SQLQuery($SQL){
 
 function SQLDo($SQL){
 //Ejecuta consultas de modificación
-	global $db;
+	global $cfg, $db, $usuario;
 	if($db[db_onoff]){
 		$SQL = utf8_decode($SQL);
 		$Cmd=array('INSERT', 'UPDATE', 'DELETE');
@@ -55,6 +55,38 @@ function SQLDo($SQL){
 		    try{
 		    	$conn = SQLConn(); //Llama conexión
 		    	$qry = $conn->query($SQL)or die(mysqli_connect_errno($conn).' -> '.mysqli_connect_error()); //Ejecuta query	    	 			    	
+		    	
+		    	// Guardar LOGS
+		    	if($cfg[querylog_onoff]){
+			    	$Id = $conn->insert_id;
+					$TotRows = $conn->affected_rows;
+					if($TotRows){
+						$Result = $TotRows;					
+						#Identify table in query
+						$idtable=$Id;
+						$action=strtoupper($vSql[0]);
+						if($action=='INSERT'){
+							$t=explode('INTO ',strtoupper($SQL));
+							$t2=explode(' ',$t[1]);
+							$table=strtolower($t2[0]);
+							$Result=$Id;
+						}				
+						if($action=='UPDATE'){
+							$t=explode(' ',strtoupper($SQL));
+							$table=strtolower($t[1]);
+						}				
+						if($action=='DELETE'){
+							$t=explode('FROM ',strtoupper($SQL));
+							$t2=explode(' ',$t[1]);
+							$table=strtolower($t2[0]);
+						}
+						if($table!=$db[tbl_online]){
+							SQLLogs($table,$idtable,$action,$SQL,'',$usuario[id_usuario]);	
+						}
+					}
+				}
+		    	// --
+
 		    	mysqli_close($conn); //Cierra conexión
 		    	return true;
 		    }catch(PDOException $e){
@@ -68,6 +100,33 @@ function SQLDo($SQL){
 	}else{
 		return 'DEBUG: Base de datos apagada.';
 	}
+}
+
+function SQLLogs($table='',$idtable='',$action='', $query='', $desc='', $iduser=''){
+## Guarda logs en DB
+	global $db;
+	if(!empty($table)){
+		$timestamp = date('Y-m-d H:i:s');
+		$query=addslashes($query);
+		$tbl_logs = $db[tbl_logs];
+		$SQL = "INSERT INTO $tbl_logs SET
+				tablename='$table',
+				id_table='$idtable',
+				accion='$action',
+				query='$query',
+				txt='$desc',
+				timestamp='$timestamp',
+				id_usuario='$iduser';";			
+		try{
+	    	$conn = SQLConn(); //Llama conexión
+	    	$qry = $conn->query($SQL)or die(mysqli_connect_errno($conn).' -> '.mysqli_connect_error()); //Ejecuta query	    	 			    	
+	    	mysqli_close($conn); //Cierra conexión
+	    	return true;
+	    }catch(PDOException $e){
+	    	echo "ERROR: Error en Tbl Logs: ".$SQL;
+	    	return false;
+	    }
+	}else{return "Error al grabar logs en $tbl_logs";}
 }
 /*O3M*/
 ?>

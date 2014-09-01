@@ -74,15 +74,18 @@ $usuario[mod5]				= $_SESSION['mod5'];
 $usuario[mod6]				= $_SESSION['mod6'];
 
 #Log Txt | (nombre_archivo, usuario ID, usuario_nombre, usuario, nivel, ruta, URLparams)
-$params = ($in) ? implode('&', array_map(function ($v, $k) { return sprintf("%s='%s'", $k, $v); }, $in, array_keys($in))) : '';
-LogTxt('he_'.$usuario[empresa],$usuario[id_usuario],$usuario[nombre],$usuario[usuario],$usuario[grupo],$Raiz[local],$params);
+if($cfg[log_onoff]){
+	$params = ($in) ? implode('&', array_map(function ($v, $k) { return sprintf("%s='%s'", $k, $v); }, $in, array_keys($in))) : '';
+	LogTxt('he_'.$usuario[empresa],$usuario[id_usuario],$usuario[nombre],$usuario[usuario],$usuario[grupo],$Raiz[local],$params);
+}	
 #Online
-$ultimo_clic=time();
-// echo online_select($usuario[id_usuario]);
-// if($qry=online_select($usuario[id_usuario])){
-// 	online_update($usuario[id_usuario], $ultimo_clic);
-// }else{
-// 	online_insert($usuario[id_usuario], $ultimo_clic);
-// }
+if($cfg[online_onoff]){
+	$ultimo_clic=time();
+	if(online_select($usuario[id_usuario])){
+		online_update($usuario[id_usuario], $ultimo_clic);
+	}else{
+		online_insert($usuario[id_usuario], $ultimo_clic);
+	}
+}
 /*O3M*/
 ?>

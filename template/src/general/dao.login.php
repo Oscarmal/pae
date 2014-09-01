@@ -6,6 +6,7 @@
 * @author 		Oscar Maldonado
 */
 function login($usuario, $clave){
+	global $db;
 	$sql = "SELECT 
 				 a.id_usuario
 				,a.usuario
@@ -27,10 +28,10 @@ function login($usuario, $clave){
 				,d.mod8
 				,d.mod9
 				,d.mod10
-				FROM sis_usuarios a
-				LEFT JOIN he_personal b USING(id_personal)
-				LEFT JOIN he_empresas c USING(id_empresa)
-				LEFT JOIN sis_accesos d ON a.id_usuario=d.id_usuario
+				FROM $db[tbl_usuarios] a
+				LEFT JOIN $db[tbl_personal] b USING(id_personal)
+				LEFT JOIN $db[tbl_empresas] c USING(id_empresa)
+				LEFT JOIN $db[tbl_accesos] d ON a.id_usuario=d.id_usuario
 				WHERE a.usuario='$usuario' and a.clave='$clave' and a.activo=1
 				LIMIT 1;";
 	$resultado = SQLQuery($sql);
