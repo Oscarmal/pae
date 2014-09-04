@@ -1,12 +1,12 @@
-body{}
-
-.modal{ 
+.modal{
+    position: relative; 
     display:none;
     font-family:Arial, Helvetica, sans-serif;
     color:#808080;
     line-height:28px;
     font-size:15px;
     text-align:justify; 
+    z-index: 201;
 }
 
 input, textarea, select{
@@ -57,4 +57,7 @@ input:focus, textarea:focus, select:focus{
 }.btn:active {
     position:relative;
     top:1px;
+}
+.txtFooter{
+    font-size: .6em;
 }

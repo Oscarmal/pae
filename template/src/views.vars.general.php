@@ -1,10 +1,12 @@
-<?php session_name('o3m'); session_start(); include_once($_SESSION['header_path']);
+<?php session_name('o3m_he'); session_start(); include_once($_SESSION['header_path']);
 /* O3M
 * Manejador de Vistas y asignación de variables
 * 
 */
 // Modulo Padre
 define(MODULO, 'GENERAL');
+global $vistas, $contenidos, $icono;
+$icono = $var[ico_01];
 # Vistas
 $vistas = array(
 			 LOGIN 	=> 'login.html'
@@ -61,8 +63,9 @@ function vars_login($urlParams){
 	## Envio de valores ##
 	$negocio = array(
 				 MORE 		=> incJs($Path[srcjs].$modulo.'login.js')
+				 			  .incCss($Path[css].'maruti-login.css')
 				,MODULE 	=> strtolower(MODULO)
-				,SECTION 	=> ($seccion)
+				,SECTION 	=> ($seccion)				
 			);
 	$texto = array(
 				 login 		=> $dic[general][login]
@@ -70,18 +73,22 @@ function vars_login($urlParams){
 				,clave 		=> $dic[general][clave]
 				,entrar 	=> $dic[general][entrar]
 				,MSJ 		=> $msj
-			);
-	$data = array_merge($negocio, $texto);
+			);	
+	$data = array_merge($negocio, $texto);	
 	return $data;
 }
 function vars_inicio($urlParams){
-	global $var, $Path, $dic, $usuario;
+	global $var, $Path, $icono, $dic;
 	## Logica de negocio ##
+	$titulo = 'INICIO';
+	$contenido = $dic[general][msj_inicio];
+
 	## Envio de valores ##
 	$negocio = array(
-				 MORE 		=> ''
-				,CONTENIDO	=> $usuario[nombre]
-				,LINK_SALIR	=> '../site/?m='.$var[GENERAL].'&s='.$var[LOGIN].'&e=2'
+				 MORE 		=> ''				
+				,ICONO 		=> $icono
+				,TITULO		=> $titulo
+				,CONTENIDO 	=> $contenido
 			);
 	$texto = array();
 	$data = array_merge($negocio, $texto);
