@@ -2,10 +2,10 @@
 ## Establece variables con ruta local
 ## $SiteFolder => El nombre de la carpeta del sitio: www/[Carpeta]
 ##
-session_name('o3m_he');
+session_name('o3m');
 session_start();
 $PublicFolder="www";
-$SiteFolder="horas-extra";
+$SiteFolder="template";
 $DirLocal=getcwd();
 $path=explode($SiteFolder,$DirLocal);
 $RaizLoc=$path[0].$SiteFolder.'/';
