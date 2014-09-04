@@ -40,7 +40,7 @@ function SQLQuery($SQL){
 		    }
 		}
 	}else{
-		// return 'DEBUG: Base de datos apagada.';
+		echo 'DEBUG: Base de datos apagada.';
 		return false;
 	}
 }
@@ -94,7 +94,7 @@ function SQLDo($SQL){
 			return false;
 		}
 	}else{
-		// return 'DEBUG: Base de datos apagada.';
+		echo 'DEBUG: Base de datos apagada.';
 		return false;
 	}
 }
